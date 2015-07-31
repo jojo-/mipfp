@@ -1,0 +1,21 @@
+Package: mipfp
+Type: Package
+Title: Multidimensional Iterative Proportional Fitting and Alternative Models
+Version: 2.2
+Date: 2015-07-31
+Authors@R: c(
+    person("Johan", "Barthelemy", role = c("aut", "cre"), email = "johan@uow.edu.au"), 
+    person("Thomas", "Suesse", role = "aut"), 
+    person("Mohammad", "Namazi-Rad", role = "ctb"))
+Author: Johan Barthelemy [aut, cre], Thomas Suesse [aut], Mohammad Namazi-Rad [ctb]
+Maintainer: Johan Barthelemy <johan@uow.edu.au>
+Description: An implementation of the iterative proportional fitting (IPFP), 
+    maximum likelihood, minimum chi-square and weighted least squares procedures
+    for updating a N-dimensional array with respect to given target marginal 
+    distributions (which, in turn can be multi-dimensional). The package also
+    provides an application of the IPFP to simulate multivariate Bernoulli
+    distributions.
+LazyData: yes
+Depends: cmm, Rsolnp, numDeriv, R(>= 2.10.0)
+License: GPL-2
+URL: www.r-project.org

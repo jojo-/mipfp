@@ -1,0 +1,4 @@
+exportPattern("^[[:alpha:]]+")
+importFrom(cmm,MarginalMatrix)
+importFrom(Rsolnp,solnp)
+importFrom(numDeriv,jacobian)
