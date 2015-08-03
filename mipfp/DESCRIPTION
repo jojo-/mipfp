@@ -18,4 +18,4 @@ Description: An implementation of the iterative proportional fitting (IPFP),
 LazyData: yes
 Depends: cmm, Rsolnp, numDeriv, R(>= 2.10.0)
 License: GPL-2
-URL: www.r-project.org
+URL: https://github.com/jojo-/mipfp
