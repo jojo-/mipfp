@@ -201,8 +201,8 @@ ObtainModelEstimates <- function(seed, target.list, target.data, method = "ml",
   }
   
   # ... equality constraints
-  eqfun1 <- function(p) {
-    return(A.new %*% p - c(margins.vector, 1))    
+  eqfun1 <- function(p) {    
+    return(A.new %*% p - c(margins.vector, 1))
   }
   
   # switching to the desired user method
@@ -298,36 +298,33 @@ ObtainModelEstimates <- function(seed, target.list, target.data, method = "ml",
   
     # constraint function h(pi) = A * pi - margins
     h.fct <- function(m) {            
-      return(A %*% (m / sum(m)) - margins.vector)            
-    }       
-        
-    # compute statistics for testing if constraints are met
-    H.seed <- t(numDeriv::jacobian(h.fct, seed.vector)) 
+      return(A %*% (m / sum(m)) - margins.vector)
+    }
+    
+    # compute statistics for testing if constraints are met and appending to
+    # the results
+    H.seed <- t(numDeriv::jacobian(h.fct, seed.vector))
     h.Y <- h.fct(seed.vector)
     # ... log-likelihood ration
-    G2 <- 2 * sum(seed.vector * log(seed.prop.vector / pi.hat))
+    results$G2 <- 2 * sum(seed.vector * log(seed.prop.vector / pi.hat))
     # ... Wald test statistic
-    W2 <- t(h.Y) %*% solve(t(H.seed) %*% diag(seed.vector) %*% H.seed) %*% h.Y
+    results$W2 <- as.double(t(h.Y) %*% solve(t(H.seed) %*% 
+                            diag(seed.vector) %*% H.seed) %*% h.Y)
     # ... Pearson Chi-square
-    X2 <- t(seed.vector - n * pi.hat) %*% diag(1 / (n * pi.hat)) %*% 
-      (seed.vector - n * pi.hat)
+    results$X2 <- as.double(t(seed.vector - n * pi.hat) %*%
+                              diag(1 / (n * pi.hat)) %*%
+                              (seed.vector - n * pi.hat))
     # ... associated degree of freedoms (dim of constraint function h)
-    df <- dim.A[1]
-    
-    # ... appending the statistics to the previous results
-    results$G2 <- G2
-    results$W2 <- W2
-    results$X2 <- X2
-    results$df <- df      
+    results$df <- dim.A[1]
     
     # Lang's covariance if requested
-    if (compute.cov == TRUE) {      
-      H.pi <- t(numDeriv::jacobian(h.fct, pi.hat))    
-      D.pi <- diag(pi.hat)          
+    if (compute.cov == TRUE) {
+      H.pi <- t(numDeriv::jacobian(h.fct, pi.hat))
+      D.pi <- diag(pi.hat)
       pi.VCov.Lang <- 1 / n * (D.pi - pi.hat %*% t(pi.hat) - D.pi %*% H.pi %*% 
                                solve(t(H.pi) %*% D.pi %*% H.pi) %*% t(H.pi)
-                               %*% D.pi)  
-      xi.VCov.Lang <- pi.VCov.Lang * sum(xi.hat.array)^2    
+                               %*% D.pi)
+      xi.VCov.Lang <- pi.VCov.Lang * sum(xi.hat.array)^2
       
       # extracting standart errors
       pi.se.Lang <- sqrt(diag(pi.VCov.Lang))
