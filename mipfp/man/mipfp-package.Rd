@@ -29,7 +29,7 @@ hence returning a matrix of full rank is provided.
 \tabular{ll}{
 Package: \tab mipfp\cr
 Type: \tab Package\cr
-Version: \tab 2.21\cr
+Version: \tab 2.2.1\cr
 Date: \tab 2015-09-18\cr
 Depends: \tab cmm, numDeriv, Rsolnp, R(>= 2.10.0)\cr
 License: \tab GPL-2\cr
