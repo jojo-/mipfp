@@ -152,7 +152,11 @@ ObtainModelEstimates <- function(seed, target.list, target.data, method = "ml",
   
   # ... equality constraints
   eqfun1 <- function(p) {    
+<<<<<<< HEAD
     return(A %*% p - margins.vector)
+=======
+    return(A.new %*% p - c(margins.vector, 1))
+>>>>>>> origin/master
   }
   
   # switching to the desired user method
@@ -222,6 +226,51 @@ ObtainModelEstimates <- function(seed, target.list, target.data, method = "ml",
   # updating the class attribute  
   class(results) <- c("list", "mipfp")
   
+<<<<<<< HEAD
+=======
+    # constraint function h(pi) = A * pi - margins
+    h.fct <- function(m) {            
+      return(A %*% (m / sum(m)) - margins.vector)
+    }
+    
+    # compute statistics for testing if constraints are met and appending to
+    # the results
+    H.seed <- t(numDeriv::jacobian(h.fct, seed.vector))
+    h.Y <- h.fct(seed.vector)
+    # ... log-likelihood ration
+    results$G2 <- 2 * sum(seed.vector * log(seed.prop.vector / pi.hat))
+    # ... Wald test statistic
+    results$W2 <- as.double(t(h.Y) %*% solve(t(H.seed) %*% 
+                            diag(seed.vector) %*% H.seed) %*% h.Y)
+    # ... Pearson Chi-square
+    results$X2 <- as.double(t(seed.vector - n * pi.hat) %*%
+                              diag(1 / (n * pi.hat)) %*%
+                              (seed.vector - n * pi.hat))
+    # ... associated degree of freedoms (dim of constraint function h)
+    results$df <- dim.A[1]
+    
+    # Lang's covariance if requested
+    if (compute.cov == TRUE) {
+      H.pi <- t(numDeriv::jacobian(h.fct, pi.hat))
+      D.pi <- diag(pi.hat)
+      pi.VCov.Lang <- 1 / n * (D.pi - pi.hat %*% t(pi.hat) - D.pi %*% H.pi %*% 
+                               solve(t(H.pi) %*% D.pi %*% H.pi) %*% t(H.pi)
+                               %*% D.pi)
+      xi.VCov.Lang <- pi.VCov.Lang * sum(xi.hat.array)^2
+      
+      # extracting standart errors
+      pi.se.Lang <- sqrt(diag(pi.VCov.Lang))
+      xi.se.Lang <- sqrt(diag(xi.VCov.Lang))
+      
+      # ... appending the Lang's covariance estimation to the results      
+      results$lang <- list("p.hat.se" = pi.se.Lang, "p.hat.cov" = pi.VCov.Lang,
+                           "x.hat.se" = xi.se.Lang, "x.hat.cov" = xi.VCov.Lang)
+      
+    }    
+               
+  }  
+
+>>>>>>> origin/master
   # returning results
   return(results)
 

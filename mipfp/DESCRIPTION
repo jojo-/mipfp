@@ -1,8 +1,13 @@
 Package: mipfp
 Type: Package
 Title: Multidimensional Iterative Proportional Fitting and Alternative Models
+<<<<<<< HEAD
 Version: 3.0
 Date: 2016-04-21
+=======
+Version: 2.2.1
+Date: 2015-09-18
+>>>>>>> origin/master
 Authors@R: c(
     person("Johan", "Barthelemy", role = c("aut", "cre"), email = "johan@uow.edu.au"), 
     person("Thomas", "Suesse", role = "aut"), 
