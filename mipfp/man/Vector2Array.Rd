@@ -34,7 +34,7 @@ Maintainer: Johan Barthelemy \email{johan@uow.edu.au}.
 }
 \seealso{
 The inverse transformation is performed with the function 
-\code{\link[mipfp:Array2Vector]{Array2Vector}}
+\code{\link[mipfp:Array2Vector]{Array2Vector}}.
 }
 \examples{
 # generate a vector [1,2,...,27]

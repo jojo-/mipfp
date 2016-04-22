@@ -2,6 +2,7 @@
 \alias{GetConfInt}
 \title{
 Computing confidence intervals for the estimated counts and probabilities
+(deprecated)
 }
 \description{
 This function computes the (asymptotic) Wald confidence intervals at a given 
@@ -30,12 +31,11 @@ level \eqn{\alpha}{\alpha} is given by
 \deqn{\hat{X} \pm z \left( 1-\frac{\alpha}{2} \right) * 
 \hat{\sigma}}{X.hat +/- z(1-\alpha/2) * \sigma.hat}
 where \eqn{\hat{\sigma}}{\sigma.hat} is the standart deviations of 
-\eqn{\hat{X}}{X.hat}, the sum of \eqn{\hat{X}}{X.hat}'s components and 
-\eqn{z}{z} is the inverse of the cumulative distribution function
-of the standard normal distribution.
+\eqn{\hat{X}}{X.hat} and \eqn{z}{z} is the inverse of the cumulative 
+distribution function of the standard normal distribution.
 }
 \value{
-  A list of matrices containing the upper and lower bounds for the estimaded
+  A list of matrices containing the upper and lower bounds for the estimated
   counts and probabilities.
   \item{lower.x}{
     Lower bounds of the confidence interval for \code{list.est$x.hat}.
@@ -60,10 +60,17 @@ Johan Barthelemy
 
 Maintainer: Johan Barthelemy \email{johan@uow.edu.au}.
 }
+\section{Warning}{
+Note: this function is deprecated, instead use
+\code{\link[mipfp:confint.mipfp]{confint.mipfp}}.
+}
 \seealso{
-\link[mipfp:Ipfp]{Ipfp} and 
-\link[mipfp:ObtainModelEstimates]{ObtainModelEstimates} to generate the
+\code{\link[mipfp:Estimate]{Estimate}}, \code{\link[mipfp:Ipfp]{Ipfp}} and 
+\code{\link[mipfp:ObtainModelEstimates]{ObtainModelEstimates}} to generate the
 inputs for this function.
+
+The S3 method \code{\link[mipfp:confint.mipfp]{confint.mipfp}} for object of 
+class \code{mipfp}.
 }
 \examples{
 # true contingency (2-way) table
@@ -78,7 +85,12 @@ target.data <- list(target.col, target.row)
 # list of dimensions of each marginal constrain
 target.list <- list(1, 2)
 # calling the Ipfp function
-res <- Ipfp(seed, target.list, target.data, compute.cov = TRUE)
+res <- Ipfp(seed, target.list, target.data)
+# addint the standart deviations to res (required by GetConfInt)
+cov.res <- vcov(res, seed = seed, target.list = target.list, 
+                target.data = target.data)
+res$p.hat.se <- cov.res$p.hat.se
+res$x.hat.se <- cov.res$x.hat.se
 # computing and printing the confidence intervals
 print(GetConfInt(res))
 }

@@ -59,7 +59,7 @@ Thomas Suesse.
 Maintainer: Johan Barthelemy \email{johan@uow.edu.au}.
 }
 \seealso{
- \code{\link[mipfp]{Corr2Odds}} for converting correlation to odds ratio.
+\code{\link[mipfp]{Corr2Odds}} for converting correlation to odds ratio.
 }
 \examples{
 # from Qaqish et al. (2012)

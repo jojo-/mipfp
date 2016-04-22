@@ -62,8 +62,8 @@ Thomas Suesse
 Maintainer: Johan Barthelemy <johan@uow.edu.au>.
 }
 \seealso{
-  \code{\link[mipfp]{ObtainMultBinaryDist}} for estimating the 
-  joint-distribution required by this function.
+\code{\link[mipfp]{ObtainMultBinaryDist}} for estimating the 
+joint-distribution required by this function.
 }
 \examples{
 # from Qaqish et al. (2012)

@@ -14,7 +14,7 @@ matrix defined by Lang (2004) is also returned.
 }
 \usage{
 ObtainModelEstimates(seed, target.list, target.data, method="ml", 
-                     replace.zeros = 1e-10, compute.cov = FALSE, ...)
+                     replace.zeros = 1e-10, ...)
 }
 \arguments{
  \item{seed}{
@@ -42,11 +42,6 @@ ObtainModelEstimates(seed, target.list, target.data, method="ml",
     as procedures require strictly positive cells. Default value is 
     \eqn{1e^{-10}}{1e-10}.
 }
-  \item{compute.cov}{
-    If set to TRUE, then the function also return the (asymptotic) covariance 
-    matrices of the updated cells and cells proportion as well as the 
-    associated standard errors. Default = FALSE.
-}
   \item{...}{Additional parameters that can be passed to control the 
     optimisation process (see \link[Rsolnp:solnp]{solnp} from the package 
     \link[Rsolnp]{Rsolnp}).
@@ -61,23 +56,7 @@ the estimated proportion and other convergence informations.
   \item{p.hat}{
     Array of the estimated table probabilities.
 }
-  \item{x.hat.cov}{
-    Asymptotic covariance matrix for \code{x.hat} using the Delta method (if 
-    \code{compute.cov = TRUE}).
-}
-  \item{x.hat.se}{
-    Vector of standard errors for \code{x.hat} using the Delta method (if 
-    \code{compute.cov = TRUE}).
-}
-  \item{p.hat.cov}{
-    Asymptotic covariance matrix for \code{p.hat} using the Delta method (if 
-    \code{compute.cov = TRUE}).
-}
-  \item{p.hat.se}{
-    Vector of standard errors for \code{p.hat} using the Delta method (if 
-    \code{compute.cov = TRUE}).
-}
-  \item{check.margins}{
+  \item{error.margins}{
     For each list element of \code{target.data}, \code{check.margins} shows the 
     maximum absolute deviation between the element and the corresponding 
     estimated margin. Note that the deviations should approximate zero, 
@@ -88,59 +67,45 @@ the estimated proportion and other convergence informations.
     the R package Rsolnp and \code{solnp.res} is the corresponding object 
     returned by the solver.
 }
-
-Additionnaly, it the estimation method is \code{ml}, then the function also 
-returns the following elements.
-  \item{G2}{
-    Log-likelihood statistic for testing that the target constraints are met.
+  \item{conv}{
+    A boolean indicating whether the algorithm converged to a solution.
 }
-  \item{W2}{
-    Wald statistic for testing that the target constraints are met.
+  \item{method}{
+    The selected method for estimation.  
 }
-  \item{X2}{
-    Pearson chi-squared statistic for testing that the target constraints are 
-    met.
-}
-  \item{df}{
-    Degrees of freedom relevant for the \code{G2}, \code{W2} and \code{X2} 
-    statistics.
-}
-  \item{lang$x.hat.cov}{
-    Asymptotic covariance matrix for \code{x.hat} using Lang's method (if
-    \code{compute.cov = TRUE}).
-}
-  \item{lang$x.hat.se}{
-    Vector of standard errors for \code{x.hat} using Lang's method (if 
-    \code{compute.cov = TRUE}).
-}
-  \item{lang$p.hat.cov}{
-    Asymptotic covariance matrix for \code{p.hat} using Lang's method (if 
-    \code{compute.cov = TRUE}).
-}
-  \item{lang$p.hat.se}{
-    Vector of standard errors for \code{p.hat} using Lang's method (if 
-    \code{compute.cov = TRUE}).
+  \item{call}{
+    The matched call.  
 }
 }
 \references{
+ Lang, J.B. (2004) 
+ Multinomial-Poisson homogeneous models for contingency tables. 
+ \emph{Annals of Statistics} 32(1): 340-383.
+
  Little, R. J., Wu, M. M. (1991)
  Models for contingency tables with known margins when target and sampled 
  populations differ.
  \emph{Journal of the American Statistical Association} 86 (413): 87-95.
- 
- Lang, J.B. (2004) 
- Multinomial-Poisson homogeneous models for contingency tables. 
- \emph{Annals of Statistics} 32(1): 340-383.
 }
 \author{
 Thomas Suesse 
 
 Maintainer: Johan Barthelemy <johan@uow.edu.au>.
 }
+\note{
+It is important to note that if the margins given in \code{target.list} are
+not consistent (i.e. the sums of their cells are not equals), the input data
+is then normalised by considering probabilities instead of frequencies:
+\itemize{
+  \item the cells of the seed are divided by \code{sum(seed)};
+  \item the cells of each margin \code{i} of the list \code{target.data} are 
+        divided by \code{sum(target.data[[i]])}.
+}
+}
 \seealso{
- \code{\link[Rsolnp:solnp]{solnp}} function documentation of the package
- \code{\link[Rsolnp]{Rsolnp}} for the details of the 
- \code{solnp.res} object returned by the function.
+\code{\link[Rsolnp:solnp]{solnp}} function documentation of the package
+\code{\link[Rsolnp]{Rsolnp}} for the details of the \code{solnp.res} object 
+returned by the function.
 }
 \examples{
 # set-up an initial 3-way table of dimension (2 x 2 x 2)

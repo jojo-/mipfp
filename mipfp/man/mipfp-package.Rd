@@ -29,8 +29,8 @@ hence returning a matrix of full rank is provided.
 \tabular{ll}{
 Package: \tab mipfp\cr
 Type: \tab Package\cr
-Version: \tab 2.2\cr
-Date: \tab 2015-07-31\cr
+Version: \tab 2.2.1\cr
+Date: \tab 2015-09-18\cr
 Depends: \tab cmm, numDeriv, Rsolnp, R(>= 2.10.0)\cr
 License: \tab GPL-2\cr
 }
@@ -40,31 +40,43 @@ distributions. Those targets can also multi-dimensional. The available methods
 are listed herehunder.
 
 \itemize{
-  \item The function \link[mipfp]{Ipfp} provides the iterative proportionnal 
-    fitting Procedure. The variance-covariance matrix for the updated cells 
-    probabilities is determined by the Delta method (Little and Wu, 1991) can
-    alsobe obtained using the function \link[mipfp]{IpfpCov}.
+  \item The function \code{\link[mipfp:Ipfp]{Ipfp}} provides the iterative 
+    proportionnal fitting Procedure.
   \item Maximum likelihood, minimum Chi-square and weighted least squares
     approaches are availables in the function
-    \link[mipfp]{ObtainModelEstimates}. Note that this function provides the 
-    updated table as well as the variance-covariance matrix of the estimated 
-    cell probabilities using either the Lang's (2004) or the Delta method 
-    (Little and Wu, 1991).
+    \link[mipfp:ObtainModelEstimates]{ObtainModelEstimates}.
 }
+The function \code{\link[mipfp:Estimate]{Estimate}} provides an interface to
+these two methods. Each of them returns an object of class \code{mipfp}, but
+\code{\link[mipfp:Estimate]{Estimate}} should be the preferred constructor.
+
+The package provides several methods and functions to extract various 
+information from the resulting object such as as the variance-covariance matrix 
+of the estimated cell probabilities or counts using either the Lang's (2004) or 
+the Delta method (Little and Wu, 1991) (\code{\link[mipfp:vcov.mipfp]{vcov}}),
+the confidence interval of the estimates 
+(\code{\link[mipfp:confint.mipfp]{confint}}), the comparison of the deviations
+(\code{\link[mipfp:CompareMaxDev]{CompareMaxDev}}), etc. Note that the functions 
+starting with a lower case are S3 methods for objects of class \code{mipfp} 
+while the one starting with an upper case are general functions.
 
 The package also includes an application of the IPFP to simulate and estimate 
 the parameters of multivariate Bernoulli distributions, respectively in the
-functions \link[mipfp]{RMultBinary} and \link[mipfp]{ObtainMultBinaryDist}.
-In addition, the functions \link[mipfp]{Corr2Odds}, \link[mipfp]{Odds2Corr}, 
-\link[mipfp]{Corr2PairProbs}, \link[mipfp]{Odds2PairProbs} are in turn 
-responsible for converting correlation to odds ratio, odds ratio to correlation, 
-correlation to pairwise probability and odds ratio to pairwise probability.
+functions \code{\link[mipfp]{RMultBinary}} and 
+\code{\link[mipfp]{ObtainMultBinaryDist}}. In addition, the functions 
+\code{\link[mipfp]{Corr2Odds}}, \code{\link[mipfp]{Odds2Corr}}, 
+\code{\link[mipfp]{Corr2PairProbs}}, \code{\link[mipfp]{Odds2PairProbs}} are in 
+turn responsible for converting correlation to odds ratio, odds ratio to 
+correlation, correlation to pairwise probability and odds ratio to pairwise 
+probability.
 
-Finally, auxillary functions are also provided. \link[mipfp]{Array2Vector} and 
-\link[mipfp]{Vector2Array} transforms an array to a vector and vice-versa.
-The function \link[mipfp]{GetLinInd} extracting the linearly independant columns 
-from a matrix (using QR decomposition) and returning a matrix of full rank is 
-also provided.
+Finally, auxillary functions are also provided. 
+\code{\link[mipfp]{Array2Vector}} and \code{\link[mipfp]{Vector2Array}} 
+transforms an array to a vector and vice-versa. \code{\link[mipfp:flat]{flat}} 
+flattens multi-dimensional objects for pretty printing. The function 
+\code{\link[mipfp]{GetLinInd}} extracting the linearly independant columns from 
+a matrix (using QR decomposition) and returning a matrix of full rank is also 
+provided.
 }
 \author{
 Johan Barthelemy and Thomas Suesse with contributions from Mohammad Namazi-Rad.

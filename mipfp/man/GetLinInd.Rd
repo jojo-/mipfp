@@ -38,7 +38,7 @@ Johan Barthelemy
 Maintainer: Johan Barthelemy \email{johan@uow.edu.au}.
 }
 \seealso{
-\link[base:qr]{qr}.
+\code{\link[base:qr]{qr}}.
 }
 \examples{
 # generation of a matrix with linearly dependant columns

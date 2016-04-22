@@ -4,10 +4,10 @@
 Multidimensional Iterative Proportional Fitting
 }
 \description{
-This function implements the iterative proportional
-fitting (IPFP) procedure. This procedure updates an initial N-dimensional array
-(referred as the seed) with respect to given target marginal distributions. 
-Those targets can also be multi-dimensional. This procedure is also able to 
+This function implements the iterative proportional fitting (IPFP) procedure. 
+This procedure updates an initial N-dimensional array (referred as the seed) 
+with respect to given target marginal distributions. Those targets can also 
+be multi-dimensional. This procedure is also able to 
 estimate a (multi-dimensional) contingency table (encoded as an array) matching 
 a given set of (multi-dimensional) margins. In that case, each cell of the seed 
 must simply be set to 1.
@@ -17,7 +17,7 @@ matrix scaling in computer science.
 }
 \usage{
 Ipfp(seed, target.list, target.data, print = FALSE, iter = 1000, tol = 1e-10,
-     na.target = FALSE, compute.cov = FALSE, ...)
+     na.target = FALSE)
 }
 \arguments{
   \item{seed}{
@@ -52,16 +52,6 @@ Ipfp(seed, target.list, target.data, print = FALSE, iter = 1000, tol = 1e-10,
     If set to TRUE, allows the targets to have NA cells. Note that in that 
     particular case the margins consistency is not checked.
 }
-  \item{compute.cov}{
-    If set to TRUE, then the function also return the (asymptotic) covariance 
-    matrices of the updated cells and cells proportion as well as the associated
-    standard errors. Default = FALSE.
-}
-  \item{...}{
-    Additional arguments that can be passed to the IpfpCov function if
-    compute.cov = TRUE. See \link[mipfp:IpfpCov]{IpfpCov} documentation for more
-    details.
-}
 }
 \value{
 A list containing the final updated array as well as other convergence
@@ -74,34 +64,21 @@ informations.
     An array with the same dimension of \code{x.hat} containing the updated
     cell probabilities, i.e. \code{x.hat / sum(x.hat)}.
 }
-  \item{x.hat.cov}{
-    Asymptotic covariance matrix for \code{x.hat} using the Delta method (if 
-    \code{compute.cov = TRUE}).
-}
-  \item{x.hat.se}{
-    Vector of standard errors for \code{x.hat} using the Delta method (if 
-    \code{compute.cov = TRUE}).
-}
-  \item{p.hat.cov}{
-    Asymptotic covariance matrix for \code{p.hat} using the Delta method (if 
-    \code{compute.cov = TRUE}).
-}
-  \item{p.hat.se}{
-    Vector of standard errors for \code{p.hat} using the Delta method (if 
-    \code{compute.cov = TRUE}).
-}
-  \item{stp.crt}{
-    The final value of the stopping criterion.
-}
   \item{evol.stp.crit}{
     The evolution of the stopping criterion over the iterations.
 }
   \item{conv}{
     A boolean indicating whether the algorithm converged to a solution.
 }
-  \item{check.margins}{
+  \item{error.margins}{
     A list returning, for each margin, the absolute maximum deviation between 
     the desired and generated margin.
+}
+  \item{method}{
+    The selected method for estimation (here it will always be \code{ipfpf}).  
+}
+  \item{call}{
+    The matched call.  
 }
 }
 \references{
@@ -125,7 +102,6 @@ informations.
  Stephan, F. F. (1942).
  Iterative method of adjusting frequency tables when expected margins are known.
  \emph{Annals of Mathematical Statistics} 13 (2): 166-178.
- 
 }
 \author{
 Johan Barthelemy.
@@ -142,18 +118,13 @@ is then normalised by considering probabilities instead of frequencies:
         divided by \code{sum(target.data[[i]])}.
 }
 }
-
 \seealso{
- \code{ipfp} for a package implementing the ipfp to solve problem of the form 
- Ax=b. 
+The documentation of \code{\link[mipfp:IpfpCov]{IpfpCov}} provide details on the
+the covariance matrices determination.
  
- The documentation of \link[mipfp:IpfpCov]{IpfpCov} provide details on the
- the covariance matrices determination.
- 
- \link[mipfp:ObtainModelEstimates]{ObtainModelEstimates} for alternatives to
- the IPFP.
+\code{\link[mipfp:ObtainModelEstimates]{ObtainModelEstimates}} for alternatives 
+to the IPFP.
 }
-
 \examples{
 # Example 1: 2-way table (V1,V2) of dim=(2,2)
 # generating an intial 2-way table to be updated
@@ -165,8 +136,8 @@ target.col <- c(30,70)
 tgt.data.2d <- list(target.col, target.row)
 # list of dimensions of each marginal constrain
 tgt.list.2d <- list(1,2)
-# calling the Ipfp function, requesting the covariance matrices
-res.2d <- Ipfp(seed.2d, tgt.list.2d, tgt.data.2d, compute.cov = TRUE)
+# calling the Ipfp function
+res.2d <- Ipfp(seed.2d, tgt.list.2d, tgt.data.2d)
 
 # Example 2: 3-way table (V1,V2,V3) of dim=(2,4,2)
 # seed

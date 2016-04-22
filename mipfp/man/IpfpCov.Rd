@@ -1,7 +1,7 @@
 \name{IpfpCov}
 \alias{IpfpCov}
 \title{
-Covariance matrix of the estimators produced by Ipfp
+Covariance matrix of the estimators produced by Ipfp (deprecated)
 }
 \description{
 This function determines the (asymptotic) covariance matrix of the estimates 
@@ -31,22 +31,22 @@ IpfpCov(estimate, seed, target.list, replace.zeros = 1e-10)
 }
 }
 \details{
- The asymptotic covariance matrix of the estimates produced by the iterative
- proportional fitting procedure has the form (Little and Wu, 1991)
- \deqn{K(K^T D1^{-1} K)^{-1} K^T D2^{-1} K (K^T D1^{-1} K)^{-1} K^T}{
- K * inv(t(K) * inv(D1) * K) * t(K) * inv(D2) * K * inv(t(K) * inv(D1)
- * K) * t(K)}
- where
- \itemize{
+The asymptotic covariance matrix of the estimates produced by the iterative
+proportional fitting procedure has the form (Little and Wu, 1991)
+\deqn{K(K^T D1^{-1} K)^{-1} K^T D2^{-1} K (K^T D1^{-1} K)^{-1} K^T}{
+      K * inv(t(K) * inv(D1) * K) * t(K) * inv(D2) * K * inv(t(K) * inv(D1)
+      * K) * t(K)}
+where
+\itemize{
   \item{\code{K} is the orthogonal complement of the marginal matrix, i.e. the 
     matrix required to obtain the marginal frequencies;}
-  \item{\code{D1} is a diagonal matrix of the estimates probabilities}
-  \item{\code{D2} is a diagonal matrix of the seed probabilities}
- }
+  \item{\code{D1} is a diagonal matrix of the estimates probabilities;}
+  \item{\code{D2} is a diagonal matrix of the seed probabilities.}
+}
 }
 \value{
-  A matrix of dimension \code{length(estimate) x length(estimate)}
-  of the asymptotic variance of the estimates produced by \code{Ipfp}.
+A matrix of dimension \code{length(estimate) x length(estimate)} of the
+asymptotic variance of the proportion estimates produced by \code{Ipfp}.  
 }
 \references{
  Little, R. J., Wu, M. M. (1991)
@@ -59,7 +59,10 @@ Johan Barthelemy.
 
 Maintainer: Johan Barthelemy \email{johan@uow.edu.au}.
 }
-
+\section{Warning}{
+Note: this function is deprecated, instead use
+\code{\link[mipfp:vcov.mipfp]{vcov.mipfp}}.
+}
 \seealso{
 \code{\link[mipfp:Ipfp]{Ipfp}} function to update an initial multidimensional
 array with respect to given constraints.
@@ -78,10 +81,8 @@ target.data <- list(target.col, target.row)
 target.list <- list(1, 2)
 # calling the Ipfp function
 res <- Ipfp(seed, target.list, target.data)
-
 # computation of the covariance matrix of the produced estimated probabilities
 res.cov <- IpfpCov(res$x.hat, seed, target.list)
-
 # 0.95 level confidence interval of the estimates
 n <- sum(res$x.hat)
 # ... lower bound
