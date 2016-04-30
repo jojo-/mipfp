@@ -20,6 +20,7 @@
 # ------------------------------------------------------------------------------
 
 ObtainModelEstimates <- function(seed, target.list, target.data, method = "ml", 
+                                 tol.margins = 1e-10, 
                                  replace.zeros = 1e-10, ...) {
   # Estimates N-way tables using max likelihood, min chi2 or least squares.
   # 
@@ -44,6 +45,7 @@ ObtainModelEstimates <- function(seed, target.list, target.data, method = "ml",
   #           minimum chi-squared) and "lsq" (least squares).
   #   replace.zeros: constant that is added to zero cell counts, as the 
   #                  procedures require strictly positive cell counts.
+  #   tol.margins: The tolerance for margins consistency.
   #   ...: Additional parameters that can be passed to control the optimisation
   #        process.
   #     
@@ -94,7 +96,7 @@ ObtainModelEstimates <- function(seed, target.list, target.data, method = "ml",
   error.margins <- TRUE
   if (length(target.data) > 1) {
     for (m in 2:length(target.data)) {      
-      if (abs(sum(target.data[[m-1]]) - sum(target.data[[m]])) > 1e-10) {   
+      if (abs(sum(target.data[[m-1]]) - sum(target.data[[m]])) > tol.margins) {   
         error.margins <- FALSE
         warning('Target not consistents - shifting to probabilities!
                   Check input data!\n')

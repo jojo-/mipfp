@@ -14,7 +14,7 @@ matrix defined by Lang (2004) is also returned.
 }
 \usage{
 ObtainModelEstimates(seed, target.list, target.data, method="ml", 
-                     replace.zeros = 1e-10, ...)
+                     tol.margins = 1e-10, replace.zeros = 1e-10, ...)
 }
 \arguments{
  \item{seed}{
@@ -36,6 +36,9 @@ ObtainModelEstimates(seed, target.list, target.data, method="ml",
     table. By default the method is \code{ml} (maximum likelihood); other 
     options available are \code{chi2} (minimum chi-squared) and \code{lsq} 
     (least squares).
+}
+  \item{tol.margins}{
+    Tolerance for the margins consistency. Default is \eqn{1e^{-10}}{1e-10}.
 }
   \item{replace.zeros}{
     Constant that is added to zero cell found in the seed,

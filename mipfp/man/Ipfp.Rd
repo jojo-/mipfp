@@ -17,7 +17,7 @@ matrix scaling in computer science.
 }
 \usage{
 Ipfp(seed, target.list, target.data, print = FALSE, iter = 1000, tol = 1e-10,
-     na.target = FALSE)
+     tol.margins = 1e-10, na.target = FALSE)
 }
 \arguments{
   \item{seed}{
@@ -47,6 +47,9 @@ Ipfp(seed, target.list, target.data, print = FALSE, iter = 1000, tol = 1e-10,
     Stopping criterion. If the maximum absolute difference between two iteration
     is lower than the value specified by \code{tol}, then ipfp has reached 
     convergence; must be greater than 0. Default is \eqn{1e^{-10}}{1e-10}.
+}
+  \item{tol.margins}{
+    Tolerance for the margins consistency. Default is \eqn{1e^{-10}}{1e-10}.
 }
   \item{na.target}{
     If set to TRUE, allows the targets to have NA cells. Note that in that 

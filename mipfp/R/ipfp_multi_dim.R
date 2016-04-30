@@ -21,7 +21,7 @@
 # ------------------------------------------------------------------------------
 
 Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000, 
-                 tol = 1e-10, na.target = FALSE) {
+                 tol = 1e-10, tol.margins = 1e-10, na.target = FALSE) {
   # Update an array using the iterative proportional fitting procedure.
   #
   # Author: J. Barthelemy
@@ -43,6 +43,7 @@ Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000,
   #   tol: If the maximum absolute difference between two iteration is lower
   #        than the value specified by tol, then ipfp has reached convergence
   #        (stopping criterion); must be greater than 0.
+  #   tol.margins: The tolerance for margins consistency.
   #   na.target: If set to TRUE, allows the targets to have NA cells. In that
   #              case the margins consistency is not checked.
   #
@@ -98,7 +99,8 @@ Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000,
   if (na.target == FALSE) {
     if (length(target.data) > 1) {
       for (m in 2:length(target.data)) {      
-        if (abs(sum(target.data[[m-1]]) - sum(target.data[[m]])) > 1e-10) {
+        if (abs(sum(target.data[[m-1]]) - sum(target.data[[m]])) > 
+            tol.margins) {
           error.margins <- FALSE
           warning('Target not consistents - shifting to probabilities!
                   Check input data!\n')
