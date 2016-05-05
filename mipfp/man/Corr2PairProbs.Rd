@@ -50,8 +50,8 @@ Thomas Suesse.
 Maintainer: Johan Barthelemy \email{johan@uow.edu.au}.
 }
 \seealso{
-  \code{\link[mipfp:Odds2PairProbs]{Odds2PairProbs}} for converting odds ratio 
-  to pairwise probability.
+\code{\link[mipfp:Odds2PairProbs]{Odds2PairProbs}} for converting odds ratio 
+to pairwise probability.
 }
 \examples{
 # correlation matrix from Qaqish et al. (2012)

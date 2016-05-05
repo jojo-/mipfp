@@ -3,7 +3,6 @@
 \title{Converting correlation to odds ratio
 }
 \description{
-
 For \eqn{K} binary (Bernoulli) random variables 
 \eqn{X_1}{X_1}, ..., \eqn{X_K}{X_K}, this function transforms the correlation
 measure of association \eqn{C_{ij}}{C_ij} between every pair
@@ -59,7 +58,8 @@ Thomas Suesse.
 Maintainer: Johan Barthelemy \email{johan@uow.edu.au}.
 }
 \seealso{
- \code{\link[mipfp]{Corr2Odds}} for converting correlation to odds ratio.
+\code{\link[mipfp:Corr2Odds]{Corr2Odds}} for converting correlation to odds 
+ratio.
 }
 \examples{
 # correlation matrix from Qaqish et al. (2012)
