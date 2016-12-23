@@ -337,6 +337,77 @@ flat.matrix  <- function(x, sep = ".", label = "value", l.names = 0, ...) {
   
 }
 
+expand <- function(x, ...) {
+  # Generic method to expand its into a data frame.
+  #
+  # Author: J. Barthelemy
+  #
+  # Args:
+  #   x: An object to be expanded.
+  #   ...: Further arguments passed to or from other methods.
+  
+  UseMethod("expand", x)
+  
+}
+
+expand.default <- function(x, ...) {
+  # Default method of the genereric expand function. A specific method to
+  # expand the argument into a data frame has not been implemented yet and the 
+  # method returns the original object.
+  #
+  # Author: J. Barthelemy
+  #
+  # Args:
+  #   x: An object.
+  #   ...: Further arguments passed to or from other methods.
+  #
+  # Returns: The original, unmodified object.
+  
+  warning('Can not expand this object into a data frame!')
+  return(x)
+  
+}
+
+expand.table <- function(x, ...) {
+  # This function takes a multi-dimensionnal contingency table and expands it 
+  # to a data frame containing individual records.
+  # Note: The function is inspired from the "Cookbook for R" available at
+  # http://www.cookbook-r.com/Manipulating_data/Converting_between_data_frames
+  # _and_contingency_tables/
+  #
+  # Author: J. Barthelemy (inspired by Winston Chang)
+  #
+  # Args: 
+  #   x: A table x.
+  #   ...: Further arguments passed to or from other methods.
+  #
+  # Returns: A data frame of the individual records derived from x.
+  
+  # check if the rounded table summed to at least 1, otherwise stops
+  if (sum(x) <= 1) {
+    stop("The sum of the element of x should be at least 1!")
+  }
+  
+  # coercing x to a data frame
+  x.df <- as.data.frame(round(x), ...)
+  
+  # getting the number of time each row must be replicated
+  idx <- rep.int(seq_len(nrow(x.df)), x.df$Freq)
+  
+  # drop count column
+  x.df$Freq <- NULL
+  
+  # get the rows from result using idx
+  result <- x.df[idx, ]
+  
+  # renaming the row names
+  row.names(result) <- 1:dim(result)[1]
+  
+  # returning the result
+  return(result)
+  
+}
+
 ComputeA <- function(dim.arr, target.list, target.data) {
   # Given two vector x and and a set of target constraints, returns the marginal
   # matrix A and vector t derived from the targets such that A' * x = t.
