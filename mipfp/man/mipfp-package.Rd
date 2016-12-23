@@ -29,8 +29,8 @@ hence returning a matrix of full rank is provided.
 \tabular{ll}{
 Package: \tab mipfp\cr
 Type: \tab Package\cr
-Version: \tab 3.0-1\cr
-Date: \tab 2015-04-29\cr
+Version: \tab 3.1\cr
+Date: \tab 2016-11-29\cr
 Depends: \tab cmm, numDeriv, Rsolnp, R(>= 2.10.0)\cr
 License: \tab GPL-2\cr
 }
@@ -70,16 +70,17 @@ turn responsible for converting correlation to odds ratio, odds ratio to
 correlation, correlation to pairwise probability and odds ratio to pairwise 
 probability.
 
-Finally, auxillary functions are also provided. 
-\code{\link[mipfp]{Array2Vector}} and \code{\link[mipfp]{Vector2Array}} 
-transforms an array to a vector and vice-versa. \code{\link[mipfp:flat]{flat}} 
-flattens multi-dimensional objects for pretty printing. The function 
-\code{\link[mipfp]{GetLinInd}} extracting the linearly independant columns from 
-a matrix (using QR decomposition) and returning a matrix of full rank is also 
-provided.
+Finally, auxillary functions are also provided. \code{\link[mipfp]{expand}} 
+expands a multi-dimensional contingency table (stored in \code{table}) into a
+data frame of individual recors. \code{\link[mipfp]{Array2Vector}} and 
+\code{\link[mipfp]{Vector2Array}} transforms an array to a vector and 
+vice-versa. \code{\link[mipfp:flat]{flat}} flattens multi-dimensional objects 
+for pretty printing. The function \code{\link[mipfp]{GetLinInd}} extracting the 
+linearly independant columns from a matrix (using QR decomposition) and 
+returning a matrix of full rank is also provided. 
 }
 \author{
-Johan Barthelemy and Thomas Suesse with contributions from Mohammad Namazi-Rad.
+Johan Barthelemy and Thomas Suesse.
 
 Maintainer: Johan Barthelemy \email{johan@uow.edu.au}.
 }

@@ -52,7 +52,7 @@ The function is inspired from the function \code{wrap.array} from the package
 }
 \seealso{
 The function \code{wrap.array} from the \code{R.utils} package
-(\url{http://cran.r-project.org/package=R.utils}).
+(\url{https://cran.r-project.org/package=R.utils}).
 }
 \examples{
 # loading the data and saving in a 3D-table
