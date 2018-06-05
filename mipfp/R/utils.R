@@ -150,7 +150,7 @@ CompareMaxDev <- function(list.mipfp = list(), true.table = NULL,
   
   if (length(list.mipfp) < 1) {
     stop('Error: list.mipfp is empty!
-         It must contains at least one mipfp object.')
+         It must contain at least one mipfp object.')
   }   
   
   tab <- array(0, dim=c(0))
@@ -178,7 +178,7 @@ CompareMaxDev <- function(list.mipfp = list(), true.table = NULL,
   
   # verbosity
   if (echo == TRUE && is.null(true.table) == TRUE) {
-    cat('Maximum absolute deviation beween targets and generated margins:\n')    
+    cat('Maximum absolute deviation between targets and generated margins:\n')    
   }
   if (echo == TRUE && is.null(true.table) == FALSE) {
     cat('Maximum absolute deviation:\n')    
