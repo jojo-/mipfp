@@ -35,8 +35,8 @@ Summary method for class \code{mipfp}.
     process (see \link[mipfp:Estimate]{Estimate} for more details).
 }
   \item{l.names}{
-    If set to a value greater than 0, then the names of the
-    categories will be shorten to a length of \code{l.names} characters.
+    If set to a value greater than 0, the names of the categories will be 
+    shortened to a length of \code{l.names} characters.
 }
   \item{\dots}{
     Further arguments passed to the underlying \code{print} and \code{flat} 
@@ -44,7 +44,7 @@ Summary method for class \code{mipfp}.
 }
 }
 \details{
-The function \code{summary.mipfp} compute and returns a list of summary
+The function \code{summary.mipfp} computes and returns a list of summary
 statistics of the estimates (covariance, t-statistics, goodness-of-fit
 statistics, associated degrees of freedom).
 }
@@ -74,7 +74,7 @@ The function \code{summary.mipfp} returns an object of class
     the desired and generated margin.
 }
   \item{vcov}{
-    A covariance matrix of the estimates (last index move fastest) computed 
+    A covariance matrix of the estimates (last index moves fastest) computed 
     using the method specified in \code{cov.method}.
 }
   \item{tab.gof}{

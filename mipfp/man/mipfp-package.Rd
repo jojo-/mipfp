@@ -35,9 +35,9 @@ Depends: \tab cmm, numDeriv, Rsolnp, R(>= 2.10.0)\cr
 License: \tab GPL-2\cr
 }
 This package provides an implementation of several fitting procedures for 
-updating a \eqn{N}-dimensional array with respect to given target marginal 
-distributions. Those targets can also multi-dimensional. The available methods
-are listed herehunder.
+updating an \eqn{N}-dimensional array with respect to given target marginal 
+distributions. Those targets can also be multi-dimensional. The available 
+methods are listed hereunder.
 
 \itemize{
   \item The function \code{\link[mipfp:Ipfp]{Ipfp}} provides the iterative 
@@ -58,7 +58,7 @@ the confidence interval of the estimates
 (\code{\link[mipfp:confint.mipfp]{confint}}), the comparison of the deviations
 (\code{\link[mipfp:CompareMaxDev]{CompareMaxDev}}), etc. Note that the functions 
 starting with a lower case are S3 methods for objects of class \code{mipfp} 
-while the one starting with an upper case are general functions.
+while the ones starting with an upper case are general functions.
 
 The package also includes an application of the IPFP to simulate and estimate 
 the parameters of multivariate Bernoulli distributions, respectively in the
@@ -70,14 +70,14 @@ turn responsible for converting correlation to odds ratio, odds ratio to
 correlation, correlation to pairwise probability and odds ratio to pairwise 
 probability.
 
-Finally, auxillary functions are also provided. \code{\link[mipfp]{expand}} 
+Finally, auxiliary functions are also provided. \code{\link[mipfp]{expand}} 
 expands a multi-dimensional contingency table (stored in \code{table}) into a
-data frame of individual recors. \code{\link[mipfp]{Array2Vector}} and 
-\code{\link[mipfp]{Vector2Array}} transforms an array to a vector and 
+data frame of individual records. \code{\link[mipfp]{Array2Vector}} and 
+\code{\link[mipfp]{Vector2Array}} transform an array to a vector and 
 vice-versa. \code{\link[mipfp:flat]{flat}} flattens multi-dimensional objects 
-for pretty printing. The function \code{\link[mipfp]{GetLinInd}} extracting the 
+for pretty printing. The function \code{\link[mipfp]{GetLinInd}}, extracting the 
 linearly independant columns from a matrix (using QR decomposition) and 
-returning a matrix of full rank is also provided. 
+returning a matrix of full rank, is also provided. 
 }
 \author{
 Johan Barthelemy and Thomas Suesse.
@@ -141,7 +141,7 @@ target.row <- c(87, 13)
 target.col <- c(52, 48)
 # storing the margins in a list
 target.data <- list(target.col, target.row)
-# list of dimensions of each marginal constrain
+# list of dimensions of each marginal constraint
 target.list <- list(1, 2)
 # calling the fitting methods
 r.ipfp <- Ipfp(seed, target.list, target.data)

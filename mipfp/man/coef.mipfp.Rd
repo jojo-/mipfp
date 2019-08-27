@@ -5,7 +5,7 @@
 Extract the coefficients of the estimates from an object of class mipfp
 }
 \description{
-This method extracts the coefficients of estimates of an mipfp object.
+This method extracts the coefficients of the estimates of an mipfp object.
 }
 \usage{
 \method{coef}{mipfp}(object, prop = FALSE, ...)

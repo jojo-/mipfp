@@ -18,7 +18,7 @@ The method also returns the associated degrees of freedom.
 }
 \arguments{
   \item{object}{
-    The object of class \code{mipfp} containing.
+    The object of class \code{mipfp} containing the estimates.
 }
   \item{seed}{
     The seed used to compute the estimates (optional). If not provided, the
@@ -75,7 +75,7 @@ derived from the vector \eqn{v}{v} and \eqn{H}{H} denotes the Jacobian evaluated
 in \eqn{\hat{\pi}}{p.hat} (the vector of the estimated probabilities) of the 
 function \eqn{h(x)}{h(x)}.
 
-The degrees of freedom for these statistics corresponds to the number of
+The degrees of freedom for these statistics correspond to the number of
 components in \eqn{m}{m}.
 }
 \value{

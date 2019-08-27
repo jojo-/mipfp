@@ -4,7 +4,7 @@
 Extracting the linearly independant columns from a matrix
 }
 \description{
-Extracts the linearly dependant columns of matrix to obtain a matrix of full
+Extracts the linearly independant columns of matrix to obtain a matrix of full
 rank using QR decomposition.
 }
 \usage{
@@ -19,7 +19,7 @@ GetLinInd(mat, tol = 1e-10)
 }
 }
 \value{
-  A list containing the new matrix and the index of the selected colums.
+  A list containing the new matrix and the index of the selected columns.
   \item{mat.li}{
     A matrix made of the linearly independant columns of \code{mat}.
 }

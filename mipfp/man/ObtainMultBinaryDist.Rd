@@ -106,7 +106,7 @@ print(p.joint$joint.proba)
 corr <- Odds2Corr(odds = or, marg.probs = p)$corr
 p.joint.alt <- ObtainMultBinaryDist(corr = corr, marg.probs = p)
 
-# checking if the results are truly identicals
+# checking if the results are truly identical
 diff <- sum(abs(p.joint.alt$joint.proba - p.joint$joint.proba))
 cat('Sum of the absolute deviations: ', diff, '\n')
 }

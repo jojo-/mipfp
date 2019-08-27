@@ -38,7 +38,7 @@ The confidence interval of the estimates \eqn{\hat{X}}{X.hat}, at significance
 level \eqn{\alpha}{\alpha} is given by
 \deqn{\hat{X} \pm z \left( 1-\frac{\alpha}{2} \right) * 
 \hat{\sigma}}{X.hat +/- z(1-\alpha/2) * \sigma.hat}
-where \eqn{\hat{\sigma}}{\sigma.hat} is the standart deviations of 
+where \eqn{\hat{\sigma}}{\sigma.hat} is the standard deviation of 
 \eqn{\hat{X}}{X.hat}, \eqn{z}{z} and 
 \eqn{\alpha = 1 - level}{\alpha = 1 - level} is the inverse of the cumulative 
 distribution function of the standard normal distribution.
@@ -74,7 +74,7 @@ target.row <- apply(true.table, 2, sum)
 target.col <- apply(true.table, 1, sum)
 # storing the margins in a list
 target.data <- list(target.col, target.row)
-# list of dimensions of each marginal constrain
+# list of dimensions of each marginal constraint
 target.list <- list(1, 2)
 # using ipfp
 res <- Estimate(seed, target.list, target.data)

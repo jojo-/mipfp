@@ -3,7 +3,7 @@
 \title{Estimating a contingency table using model-based approaches
 }
 \description{This function provides several alternative estimating methods to 
-the IPFP when estimating a multiway table subject to known constrains/totals: 
+the IPFP when estimating a multiway table subject to known constraints/totals: 
 maximum likelihood method (ML), minimum chi-squared (CHI2) and weighted least 
 squares (WLSQ). Note that the resulting estimators are probabilities.
    
@@ -38,10 +38,10 @@ ObtainModelEstimates(seed, target.list, target.data, method="ml",
     (least squares).
 }
   \item{tol.margins}{
-    Tolerance for the margins consistency. Default is \eqn{1e^{-10}}{1e-10}.
+    Tolerance for the margins' consistency. Default is \eqn{1e^{-10}}{1e-10}.
 }
   \item{replace.zeros}{
-    Constant that is added to zero cell found in the seed,
+    Constant that is added to zero cells found in the seed,
     as procedures require strictly positive cells. Default value is 
     \eqn{1e^{-10}}{1e-10}.
 }
@@ -52,7 +52,7 @@ ObtainModelEstimates(seed, target.list, target.data, method="ml",
 }
 \value{
 A list containing the final estimated table as well as the covariance matrix of
-the estimated proportion and other convergence informations.
+the estimated proportion and other convergence information.
   \item{x.hat}{
     Array of the estimated table frequencies.
 }

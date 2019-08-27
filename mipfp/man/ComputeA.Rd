@@ -9,7 +9,7 @@ Given a set of marginal target constraints and the dimension of the array
 \eqn{A}{A} of full rank and vector \eqn{m}{m} such that
 \deqn{A^T \pi = (m, 1)^T}{t(A) * p = t(c(m, 1)) }
 where vector \eqn{m}{m} contains all components but one of every target and
-\eqn{\pi}{p} is a vector of the (unknow) components of \eqn{X}.
+\eqn{\pi}{p} is a vector of the (unknown) components of \eqn{X}.
 }
 \usage{
 ComputeA(dim.arr, target.list, target.data)
