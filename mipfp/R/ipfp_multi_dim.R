@@ -63,8 +63,8 @@ Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000,
   }
   
   # checking if target are provided
-  if (is.null(target.data) == TRUE | is.null(target.data) == TRUE) {
-    stop('Error: target.data and/or target.data not specified!')
+  if (is.null(target.data) == TRUE | is.null(target.list) == TRUE) {
+    stop('Error: target.data and/or target.list not specified!')
   }
   
   # checking if NA in target cells if na.target is set to FALSE
