@@ -98,15 +98,13 @@ Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000,
   error.margins <- TRUE  
   if (na.target == FALSE) {
     if (length(target.data) > 1) {
-      for (m in 2:length(target.data)) {      
-        if (abs(sum(target.data[[m-1]]) - sum(target.data[[m]])) > 
-            tol.margins) {
-          error.margins <- FALSE
-          warning('Target not consistents - shifting to probabilities!
-                  Check input data!\n')
-          break
-        }      
-      }
+      if (max(sapply(target.data, sum)) - min(sapply(target.data, sum)) > 
+          tol.margins) {
+        error.margins <- FALSE
+        warning('Target not consistent - shifting to probabilities!
+                Check input data!\n')
+        break
+      }      
     }
   } else {
     if (print == TRUE) {
