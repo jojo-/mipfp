@@ -32,7 +32,7 @@ and Wu (1991) or Lang's formula (2004).
 }
   \item{target.list}{
     A list of the target margins used to create \code{object} function. Each
-    component of the list is an array whose cells indicates which dimension the
+    component of the list is an array whose cells indicate which dimension the
     corresponding margin relates to (optional).
 }
   \item{replace.zeros}{
@@ -44,7 +44,7 @@ and Wu (1991) or Lang's formula (2004).
 }
 }
 \details{
-The asymptotic covariance matrix of the estimates probabilities using Delta's 
+The asymptotic covariance matrix of the estimates' probabilities using Delta's 
 formula has the form (Little and Wu, 1991)
 \deqn{K(K^T D1^{-1} K)^{-1} K^T D2^{-1} K (K^T D1^{-1} K)^{-1} K^T}{
       K * inv(t(K) * inv(D1) * K) * t(K) * inv(D2) * K * inv(t(K) * inv(D1)
@@ -55,7 +55,7 @@ where
     matrix \eqn{A}{A} required to obtain the marginal frequencies \eqn{m}{m};
 }
   \item{\code{D1} and \code{D2} are two diagonal matrices whose components
-    depends on the estimation process used to generate \code{object}.
+    depend on the estimation process used to generate \code{object}.
 }
 }
 If the estimation process has been done using
@@ -98,19 +98,19 @@ where
 \value{
 A list with the following components:
   \item{x.hat.cov}{
-    A covariance matrix of the estimated counts (last index move fastest)
+    A covariance matrix of the estimated counts (last index moves fastest)
     computed using the method specified in \code{cov.method}.
 }
   \item{p.hat.cov}{
     A covariance matrix of the estimated probabilities (last index 
-    move fastest) computed using the method specified in \code{cov.method}.
+    moves fastest) computed using the method specified in \code{cov.method}.
 }
   \item{x.hat.se}{
-    The standard deviation of the estimated counts (last index move fastest)
+    The standard deviation of the estimated counts (last index moves fastest)
     computed using the method specified in \code{cov.method}.
 }
   \item{p.hat.se}{
-    The standard deviation of the estimated probabilities (last index move 
+    The standard deviation of the estimated probabilities (last index moves 
     fastest) computed using the method specified in \code{cov.method}.
 }
   \item{df}{
@@ -150,7 +150,7 @@ target.row <- apply(true.table, 2, sum)
 target.col <- apply(true.table, 1, sum)
 # storing the margins in a list
 target.data <- list(target.col, target.row)
-# list of dimensions of each marginal constrain
+# list of dimensions of each marginal constraint
 target.list <- list(1, 2)
 # calling the Estimate function
 res <- Estimate(seed, target.list, target.data)

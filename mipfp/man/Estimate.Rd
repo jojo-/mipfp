@@ -5,8 +5,8 @@
 Update an N-way table given target margins
 }
 \description{
-This function provides several estimating methods to up multiway table 
-(referred as the seed) subject to known constrains/totals: Iterative 
+This function provides several estimating methods to update a multiway table 
+(referred to as the seed) subject to known constraints/totals: Iterative 
 proportional fitting procedure (ipfp), maximum likelihood method (ml), minimum 
 chi-squared (chi2) and weighted least squares (lsq). Note that the targets can 
 also be multi-dimensional.
@@ -22,7 +22,7 @@ Estimate(seed, target.list, target.data, method = "ipfp", keep.input = FALSE,
     when \code{method} is \code{ml}, \code{lsq} or \code{chi2}.
 }
   \item{target.list}{
-    A list of dimensions of the marginal target constrains in
+    A list of dimensions of the marginal target constraints in
     \code{target.data}. Each component of the list is an array whose cells 
     indicate which dimension the corresponding margin relates to.
 }
@@ -34,12 +34,12 @@ Estimate(seed, target.list, target.data, method = "ipfp", keep.input = FALSE,
 }
   \item{method}{
     An optional character string indicating which method is to be used to
-    update the \code{seed}. This must be on of the strings "ipfp", "ml",
+    update the \code{seed}. This must be one of the strings "ipfp", "ml",
     "chi2", or "lsq". Default is "ipfp".
 }
   \item{keep.input}{
-    A Boolean indicating if \code{seed}, \code{target.data} and 
-    \code{target.list} when set to \code{TRUE}.
+    A Boolean that, when set to \code{TRUE}, will add \code{seed}, 
+    \code{target.data} and \code{target.list} to the returned object.
 }
   \item{\dots}{
     Additionals argument that can be passed to the functions 
@@ -52,11 +52,11 @@ Estimate(seed, target.list, target.data, method = "ipfp", keep.input = FALSE,
 An object of class \code{mipfp} is a list containing at least the 
 following components:
   \item{x.hat}{
-    An array with the same dimension of \code{seed} whose margins match those
+    An array with the same dimension as \code{seed} whose margins match those
     specified in \code{target.list}.
 }
   \item{p.hat}{
-    An array with the same dimension of \code{x.hat} containing the updated
+    An array with the same dimension as \code{x.hat} containing the updated
     cell probabilities, i.e. \code{x.hat / sum(x.hat)}.
 }
   \item{error.margins}{

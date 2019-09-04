@@ -5,8 +5,8 @@
 Synthetic population of Namur (Belgium)
 }
 \description{
-This data drame contains a synthetic population of individuals for Belgian city
-of Namur. The attributes details the gender, age class, socio-professional
+This data frame contains a synthetic population of individuals for the Belgian 
+city of Namur. The attributes detail the gender, age class, socio-professional
 status, education level and driving license ownership of every synthetic
 individual.
 }

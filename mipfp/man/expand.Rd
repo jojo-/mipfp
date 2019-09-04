@@ -4,10 +4,10 @@
 \alias{expand.table}
 
 \title{
-Expand a Table in a Data Frame
+Expand a Table into a Data Frame
 }
 \description{
-This function takes a multi-dimensionnal contingency table and expands it to a 
+This function takes a multi-dimensional contingency table and expands it to a 
 data frame containing individual records.
 }
 \usage{
@@ -17,7 +17,7 @@ expand(x, ...)
 }
 \arguments{
   \item{x}{
-    An object of type \code{table} storing a N-dimensial contingency table.
+    An object of type \code{table} storing an N-dimensional contingency table.
 }
   \item{\dots}{
     Further arguments passed to or from other methods.
@@ -38,8 +38,8 @@ Maintainer: Johan Barthelemy \email{johan@uow.edu.au}.
 \note{
 The function is inspired from the "Cookbook for R".
 
-It should also be noted that the cells od \code{x} are rounded before being
-expanded in a data frame.
+It should also be noted that the cells of \code{x} are rounded before being
+expanded to a data frame.
 }
 \seealso{
 \code{\link[base]{expand.grid}} and \code{\link[base]{as.data.frame}}.

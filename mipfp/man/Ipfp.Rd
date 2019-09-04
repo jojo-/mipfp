@@ -5,7 +5,7 @@ Multidimensional Iterative Proportional Fitting
 }
 \description{
 This function implements the iterative proportional fitting (IPFP) procedure. 
-This procedure updates an initial N-dimensional array (referred as the seed) 
+This procedure updates an initial N-dimensional array (referred to as the seed) 
 with respect to given target marginal distributions. Those targets can also 
 be multi-dimensional. This procedure is also able to 
 estimate a (multi-dimensional) contingency table (encoded as an array) matching 
@@ -25,7 +25,7 @@ Ipfp(seed, target.list, target.data, print = FALSE, iter = 1000, tol = 1e-10,
     be non-negative.
 }
   \item{target.list}{
-    A list of dimensions of the marginal target constrains in
+    A list of dimensions of the marginal target constraints in
     \code{target.data}. Each component of the list is an array whose cells 
     indicate which dimension the corresponding margin relates to.
 }    
@@ -40,13 +40,14 @@ Ipfp(seed, target.list, target.data, print = FALSE, iter = 1000, tol = 1e-10,
     and the associated value of the stopping criterion. Default is FALSE.
 }
   \item{iter}{
-    Stopping criterion. The maximum number of iteration allowed; 
+    Stopping criterion. The maximum number of iterations allowed; 
     must be greater than 0. Default is 1000.
 }
   \item{tol}{
-    Stopping criterion. If the maximum absolute difference between two iteration
-    is lower than the value specified by \code{tol}, then ipfp has reached 
-    convergence; must be greater than 0. Default is \eqn{1e^{-10}}{1e-10}.
+    Stopping criterion. If the maximum absolute difference between two 
+    iterations is lower than the value specified by \code{tol}, then ipfp has
+    reached convergence; must be greater than 0. Default is 
+    \eqn{1e^{-10}}{1e-10}.
 }
   \item{tol.margins}{
     Tolerance for the margins consistency. Default is \eqn{1e^{-10}}{1e-10}.
@@ -58,13 +59,13 @@ Ipfp(seed, target.list, target.data, print = FALSE, iter = 1000, tol = 1e-10,
 }
 \value{
 A list containing the final updated array as well as other convergence
-informations.
+information.
   \item{x.hat}{
-    An array with the same dimension of \code{seed} whose margins match those
+    An array with the same dimension as \code{seed} whose margins match those
     specified in \code{target.list}.
 }
   \item{p.hat}{
-    An array with the same dimension of \code{x.hat} containing the updated
+    An array with the same dimension as \code{x.hat} containing the updated
     cell probabilities, i.e. \code{x.hat / sum(x.hat)}.
 }
   \item{evol.stp.crit}{
@@ -113,7 +114,7 @@ Maintainer: Johan Barthelemy \email{johan@uow.edu.au}.
 }
 \note{
 It is important to note that if the margins given in \code{target.list} are
-not consistent (i.e. the sums of their cells are not equals), the input data
+not consistent (i.e. the sums of their cells are not equal), the input data
 is then normalised by considering probabilities instead of frequencies:
 \itemize{
   \item the cells of the seed are divided by \code{sum(seed)};
@@ -122,7 +123,7 @@ is then normalised by considering probabilities instead of frequencies:
 }
 }
 \seealso{
-The documentation of \code{\link[mipfp:IpfpCov]{IpfpCov}} provide details on the
+The documentation of \code{\link[mipfp:IpfpCov]{IpfpCov}} provides details on 
 the covariance matrices determination.
  
 \code{\link[mipfp:ObtainModelEstimates]{ObtainModelEstimates}} for alternatives 
@@ -137,7 +138,7 @@ target.row <- c(50,50)
 target.col <- c(30,70)
 # storing the margins in a list
 tgt.data.2d <- list(target.col, target.row)
-# list of dimensions of each marginal constrain
+# list of dimensions of each marginal constraint
 tgt.list.2d <- list(1,2)
 # calling the Ipfp function
 res.2d <- Ipfp(seed.2d, tgt.list.2d, tgt.data.2d)
@@ -154,7 +155,7 @@ target.V2.V3 <- array(4, dim=c(4,2))
 target.V2.V3[1,1] <- 10
 target.V2.V3[3,1] <- 22
 target.V2.V3[4,2] <- 14
-# list of dimensions of each marginal constrain
+# list of dimensions of each marginal constraint
 tgt.data.3d <- list(target.V1, target.V2.V3)
 # storing the description of target data in a list
 tgt.list.3d <- list( 1, c(2,3) )

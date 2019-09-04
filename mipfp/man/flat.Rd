@@ -31,7 +31,7 @@ while the only column stores the initial data of the object.
     The name of the column storing the data.
 }
   \item{l.names}{
-    If set to a value greater than 0, then the dimnames will be shorten to
+    If set to a value greater than 0, then the dimnames will be shortened to
     a length of \code{l.names} characters.
 }
   \item{\dots}{
