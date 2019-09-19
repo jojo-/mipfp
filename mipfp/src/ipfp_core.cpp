@@ -24,6 +24,11 @@
 
 #include <Rcpp.h>
 
+// parallel support
+#ifdef _OPENMP
+#include <omp.h>
+#endif
+
 void CalcIdxCoreC(const std::vector<int>& target_margin,
                   const std::vector<int>& dim_seed,
                   const int& n_dims,
@@ -142,7 +147,8 @@ Rcpp::List IpfpCoreC(const Rcpp::NumericVector& seed,
                      const bool& print,
                      const int& iter,
                      const double& tol,
-                     const bool& na_target) {
+                     const bool& na_target,
+                     const int& n_threads = 1) {
   // Update an array using the iterative proportional fitting procedure.
   //
   // Author: O. Krebs
@@ -208,6 +214,7 @@ Rcpp::List IpfpCoreC(const Rcpp::NumericVector& seed,
   // get deep copies of the seed to modify
   std::vector<double> result = Rcpp::as<std::vector<double> >(seed);
   std::vector<double> result_tmp = Rcpp::as<std::vector<double> >(seed);
+  std::size_t result_length = result.size();
   
   // initializations for the loop
   double result_diff = 0;
@@ -231,6 +238,7 @@ Rcpp::List IpfpCoreC(const Rcpp::NumericVector& seed,
     for(std::size_t t = 0; t < n_targets; t++) {
       
       // update result with target t
+      #pragma omp parallel for num_threads(n_threads)
       for (std::size_t j = 0; j < t_length[t]; j++) {
         
         double tmp_sum = 0;
@@ -268,7 +276,8 @@ Rcpp::List IpfpCoreC(const Rcpp::NumericVector& seed,
       // when run on the last margin, check for convergence
       if(t == n_targets - 1) {
         stp_crit = 0;
-        for (std::size_t j = 0, max_j = result.size(); j < max_j; j++) {
+        #pragma omp parallel for num_threads(n_threads) reduction(max:stp_crit)
+        for (std::size_t j = 0; j < result_length; j++) {
           result_diff = std::abs(result[j] - result_tmp[j]);
           if (result_diff > stp_crit) {
             stp_crit = result_diff;

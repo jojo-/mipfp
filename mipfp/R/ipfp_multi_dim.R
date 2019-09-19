@@ -20,7 +20,8 @@
 # ------------------------------------------------------------------------------
 
 Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000, 
-                 tol = 1e-10, tol.margins = 1e-10, na.target = FALSE) {
+                 tol = 1e-10, tol.margins = 1e-10, na.target = FALSE,
+                 n.threads = 1) {
   # Update an array using the iterative proportional fitting procedure.
   #
   # Author: J. Barthelemy and O. Krebs
@@ -45,6 +46,7 @@ Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000,
   #   tol.margins: The tolerance for margins consistency.
   #   na.target: If set to TRUE, allows the targets to have NA cells. In that
   #              case the margins consistency is not checked.
+  #   n.threads: The number of threads to parallelize on. 
   #
   # Returns: A mipfp object consisting of a list whose elements are
   #   call: A call object in which all the specified arguments are given by
@@ -126,7 +128,7 @@ Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000,
   
   # ipfp iterations
   results.list <- .IpfpCoreC(seed, target.list, target.data, print, iter, tol,
-                             na.target) 
+                             na.target, n.threads) 
   
   # checking the convergence
   if (results.list$conv == FALSE) {

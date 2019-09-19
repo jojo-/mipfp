@@ -6,8 +6,8 @@
 using namespace Rcpp;
 
 // IpfpCoreC
-Rcpp::List IpfpCoreC(const Rcpp::NumericVector& seed, const Rcpp::List& target_list, const Rcpp::List& target_data, const bool& print, const int& iter, const double& tol, const bool& na_target);
-RcppExport SEXP _mipfp_IpfpCoreC(SEXP seedSEXP, SEXP target_listSEXP, SEXP target_dataSEXP, SEXP printSEXP, SEXP iterSEXP, SEXP tolSEXP, SEXP na_targetSEXP) {
+Rcpp::List IpfpCoreC(const Rcpp::NumericVector& seed, const Rcpp::List& target_list, const Rcpp::List& target_data, const bool& print, const int& iter, const double& tol, const bool& na_target, const int& n_threads);
+RcppExport SEXP _mipfp_IpfpCoreC(SEXP seedSEXP, SEXP target_listSEXP, SEXP target_dataSEXP, SEXP printSEXP, SEXP iterSEXP, SEXP tolSEXP, SEXP na_targetSEXP, SEXP n_threadsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -18,13 +18,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const int& >::type iter(iterSEXP);
     Rcpp::traits::input_parameter< const double& >::type tol(tolSEXP);
     Rcpp::traits::input_parameter< const bool& >::type na_target(na_targetSEXP);
-    rcpp_result_gen = Rcpp::wrap(IpfpCoreC(seed, target_list, target_data, print, iter, tol, na_target));
+    Rcpp::traits::input_parameter< const int& >::type n_threads(n_threadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(IpfpCoreC(seed, target_list, target_data, print, iter, tol, na_target, n_threads));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_mipfp_IpfpCoreC", (DL_FUNC) &_mipfp_IpfpCoreC, 7},
+    {"_mipfp_IpfpCoreC", (DL_FUNC) &_mipfp_IpfpCoreC, 8},
     {NULL, NULL, 0}
 };
 
