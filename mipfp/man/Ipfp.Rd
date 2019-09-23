@@ -17,7 +17,7 @@ matrix scaling in computer science.
 }
 \usage{
 Ipfp(seed, target.list, target.data, print = FALSE, iter = 1000, tol = 1e-10,
-     tol.margins = 1e-10, na.target = FALSE)
+     tol.margins = 1e-10, na.target = FALSE, n.threads = 1)
 }
 \arguments{
   \item{seed}{
@@ -55,6 +55,11 @@ Ipfp(seed, target.list, target.data, print = FALSE, iter = 1000, tol = 1e-10,
   \item{na.target}{
     If set to TRUE, allows the targets to have NA cells. Note that in that 
     particular case the margins consistency is not checked.
+}
+  \item{n.threads}{
+    The Ipfp algorithm supports parallelization using OpenMP with n.threads
+    setting the number of threads to use. Due to the overhead created this will
+    only lead to speed gains for relatively large fitting problems.
 }
 }
 \value{
