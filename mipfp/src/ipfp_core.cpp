@@ -230,7 +230,7 @@ Rcpp::List IpfpCoreC(const Rcpp::NumericVector& seed,
     }
     
     // saving previous iteration result (for testing convergence)
-    result.swap(result_tmp);
+    result_tmp = result;
     
     // reset stp.crit
     stp_crit = 0;
@@ -246,13 +246,7 @@ Rcpp::List IpfpCoreC(const Rcpp::NumericVector& seed,
         
         // get current margin sum
         for (std::size_t s = 0, max_s = step_idx[t].size(); s < max_s; s++) {
-          // pulling result from result_temp on first run, avoids having to 
-          // copy result_temp to result above
-          if (t  == 0) {
-            tmp_sum += result_tmp[start_idx[t][j] - 1 + step_idx[t][s] - 1];
-          } else {
-            tmp_sum += result[start_idx[t][j] - 1 + step_idx[t][s] - 1];
-          }
+          tmp_sum += result[start_idx[t][j] - 1 + step_idx[t][s] - 1];
         }
         // check for 0's and derive update factor
         if(tmp_sum == 0) {
@@ -262,16 +256,9 @@ Rcpp::List IpfpCoreC(const Rcpp::NumericVector& seed,
         }
         // apply update factor
         for (std::size_t s = 0, max_s = step_idx[t].size(); s < max_s; s++) {
-          if (t == 0) {
-            result[start_idx[t][j] - 1 +  step_idx[t][s] - 1] = 
-              result_tmp[start_idx[t][j] - 1 +  step_idx[t][s] - 1] + 
-              result_tmp[start_idx[t][j] - 1 +  step_idx[t][s] - 1] * 
-              update_factor;
-          } else {
-            result[start_idx[t][j] - 1 +  step_idx[t][s] - 1] +=
-              result[start_idx[t][j] - 1 +  step_idx[t][s] - 1] *
-              update_factor;
-          }
+          result[start_idx[t][j] - 1 +  step_idx[t][s] - 1] +=
+            result[start_idx[t][j] - 1 +  step_idx[t][s] - 1] *
+            update_factor;
         }
       }
       // when run on the last margin, check for convergence
