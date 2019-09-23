@@ -241,9 +241,8 @@ Rcpp::List IpfpCoreC(const Rcpp::NumericVector& seed,
       #pragma omp parallel for num_threads(n_threads)
       for (std::size_t j = 0; j < t_length[t]; j++) {
         
-        double tmp_sum = 0;
-        double update_factor = 0;
-        double result_diff = 0;
+        long double tmp_sum = 0;
+        long double update_factor = 0;
         
         // get current margin sum
         for (std::size_t s = 0, max_s = step_idx[t].size(); s < max_s; s++) {
@@ -257,18 +256,20 @@ Rcpp::List IpfpCoreC(const Rcpp::NumericVector& seed,
         }
         // check for 0's and derive update factor
         if(tmp_sum == 0) {
-          update_factor = 0;
+          update_factor = -1;
         } else {
-          update_factor = vtarget_data[t][j] / tmp_sum;
+          update_factor = (vtarget_data[t][j] - tmp_sum) / tmp_sum;
         }
         // apply update factor
         for (std::size_t s = 0, max_s = step_idx[t].size(); s < max_s; s++) {
           if (t == 0) {
             result[start_idx[t][j] - 1 +  step_idx[t][s] - 1] = 
+              result_tmp[start_idx[t][j] - 1 +  step_idx[t][s] - 1] + 
               result_tmp[start_idx[t][j] - 1 +  step_idx[t][s] - 1] * 
               update_factor;
           } else {
-            result[start_idx[t][j] - 1 +  step_idx[t][s] - 1] *= 
+            result[start_idx[t][j] - 1 +  step_idx[t][s] - 1] +=
+              result[start_idx[t][j] - 1 +  step_idx[t][s] - 1] *
               update_factor;
           }
         }
