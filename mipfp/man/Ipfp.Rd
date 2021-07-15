@@ -142,7 +142,7 @@ seed.2d <- array(1,dim=c(2,2))
 target.row <- c(50,50)
 target.col <- c(30,70)
 # storing the margins in a list
-tgt.data.2d <- list(target.col, target.row)
+tgt.data.2d <- list(target.row, target.col)
 # list of dimensions of each marginal constraint
 tgt.list.2d <- list(1,2)
 # calling the Ipfp function
