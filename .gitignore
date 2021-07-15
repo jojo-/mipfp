@@ -7,7 +7,12 @@
 
 # RStudio files
 .Rproj.user/
+*.Rproj
 
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
+
+# built c++ binaries
+mipfp/src/*.o
+mipfp/src/*.so

@@ -1,5 +1,5 @@
 # File mipfp/R/ipfpMultiDim.R
-# by Johan Barthelemy and Thomas Suesse
+# by Johan Barthelemy, Thomas Suesse and Oliver Krebs
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -15,16 +15,16 @@
 #  http://www.r-project.org/Licenses/
 
 # ------------------------------------------------------------------------------
-# This file provides the functions Ipfp and Ipfp.Covar that respectively
-# implements the iterative proportional fitting procedure and a Delta method
-# that computes the covariance matrix of the estimate produced by Ipfp.
+# This file provides the function Ipfp that implements the iterative 
+# proportional fitting procedure.
 # ------------------------------------------------------------------------------
 
 Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000, 
-                 tol = 1e-10, tol.margins = 1e-10, na.target = FALSE) {
+                 tol = 1e-10, tol.margins = 1e-10, na.target = FALSE,
+                 n.threads = 1) {
   # Update an array using the iterative proportional fitting procedure.
   #
-  # Author: J. Barthelemy
+  # Author: J. Barthelemy and O. Krebs
   #  
   # Args:
   #   seed: The initial multi-dimensional array to be updated. Each cell must
@@ -46,6 +46,7 @@ Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000,
   #   tol.margins: The tolerance for margins consistency.
   #   na.target: If set to TRUE, allows the targets to have NA cells. In that
   #              case the margins consistency is not checked.
+  #   n.threads: The number of threads to parallelize on. 
   #
   # Returns: A mipfp object consisting of a list whose elements are
   #   call: A call object in which all the specified arguments are given by
@@ -124,59 +125,16 @@ Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000,
   if (print == TRUE & error.margins == TRUE & na.target == FALSE) {
     cat('Margins consistency checked!\n')
   }
-    
-  # initial value is the seed
-  result <- seed  
-  converged <- FALSE
-  tmp.evol.stp.crit <- vector(mode="numeric", length = iter)
   
   # ipfp iterations
-  for (i in 1:iter) {
-    
-    if (print == TRUE) {
-      cat('... ITER', i, '\n')
-    } 
-    
-    # saving previous iteration result (for testing convergence)
-    result.temp <- result
-            
-    # loop over the constraints
-    for (j in 1:length(target.list)) {
-      # ... extracting current margins      
-      temp.sum <- apply(result, target.list[[j]], sum)
-      # ... computation of the update factor, taking care of 0 and NA cells   
-      update.factor <- ifelse(target.data[[j]] == 0 | temp.sum == 0, 0,
-                              target.data[[j]] / temp.sum)
-      if (na.target == TRUE) {
-        update.factor[is.na(update.factor)] <- 1;
-      }
-      # ... apply the update factor
-      result <- sweep(result, target.list[[j]], update.factor, FUN = "*")
-    }
-    
-    # stopping criterion
-    stp.crit <- max(abs(result - result.temp))
-    tmp.evol.stp.crit[i] <- stp.crit
-    if (stp.crit < tol) {
-      converged <- TRUE
-      if (print == TRUE) {
-        cat('       stoping criterion:', stp.crit, '\n')
-        cat('Convergence reached after', i, 'iterations!\n')
-      } 
-      break
-    }
-    
-    if (print == TRUE) {
-      cat('       stoping criterion:', stp.crit, '\n')
-    }
-    
-  }
-    
+  results.list <- .IpfpCoreC(seed, target.list, target.data, print, iter, tol,
+                             na.target, n.threads) 
+  
   # checking the convergence
-  if (converged == FALSE) {
-    warning('IPFP did not converged after ', iter, ' iteration(s)! 
+  if (results.list$conv == FALSE) {
+    warning('IPFP did not converge after ', iter, ' iteration(s)! 
             This migh be due to 0 cells in the seed, maximum number 
-            of iteration too low or tolerance too small\n')
+            of iterations too low or tolerance too small\n')
   }        
   
   # computing final max difference between generated and target margins
@@ -184,24 +142,18 @@ Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000,
   if (na.target == FALSE) {
     for (j in 1:length(target.list)) {
       diff.margins[j] = max(abs(target.data[[j]] 
-                                - apply(result, target.list[[j]], sum)))
+                                - apply(results.list$x.hat, target.list[[j]],
+                                        sum)))
       if (is.null(names(dimnames(seed))) == FALSE) {
         names(diff.margins)[j] <- paste(names(dimnames(seed))[target.list[[j]]],
                                         collapse = ".")
       }
     }
   }
-  
-  # storing the evolution of the stopping criterion
-  evol.stp.crit <- tmp.evol.stp.crit[1:i]
+  results.list$error.margins <- diff.margins
   
   # computing the proportions
-  result.prop <- result / sum(result)
-  
-  # gathering the results in a list
-  results.list <- list("x.hat" = result, "p.hat" = result.prop, 
-                       "conv" = converged, "error.margins" = diff.margins, 
-                       "evol.stp.crit" = evol.stp.crit)
+  results.list$p.hat <- results.list$x.hat / sum(results.list$x.hat)
   
   # adding the method applied
   results.list$method <- "ipfp"
@@ -209,6 +161,9 @@ Ipfp <- function(seed, target.list, target.data, print = FALSE, iter = 1000,
   # adding the calling expression
   results.list$call <- match.call()
   
+  # order list 
+  results.list <- results.list[c("x.hat", "p.hat", "conv", "error.margins",
+                                 "evol.stp.crit", "method", "call")]
   # updating the class attribute
   class(results.list) <- c("list", "mipfp")      
   
