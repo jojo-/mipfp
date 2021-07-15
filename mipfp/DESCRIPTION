@@ -1,13 +1,16 @@
 Package: mipfp
 Type: Package
-Title: Multidimensional Iterative Proportional Fitting and Alternative Models
-Version: 3.1
-Date: 2016-11-29
+Title: Multidimensional Iterative Proportional Fitting and Alternative
+        Models
+Version: 3.2.1
+Date: 2018-08-29
 Authors@R: c(
     person("Johan", "Barthelemy", role = c("aut", "cre"), email = "johan@uow.edu.au"), 
     person("Thomas", "Suesse", role = "aut"), 
     person("Mohammad", "Namazi-Rad", role = "ctb"))
-Author: Johan Barthelemy [aut, cre], Thomas Suesse [aut], Mohammad Namazi-Rad [ctb]
+Author: Johan Barthelemy [aut, cre],
+  Thomas Suesse [aut],
+  Mohammad Namazi-Rad [ctb]
 Maintainer: Johan Barthelemy <johan@uow.edu.au>
 Description: An implementation of the iterative proportional fitting (IPFP), 
     maximum likelihood, minimum chi-square and weighted least squares procedures
@@ -19,3 +22,7 @@ LazyData: yes
 Depends: cmm, Rsolnp, numDeriv, R(>= 2.10.0)
 License: GPL-2
 URL: https://github.com/jojo-/mipfp
+NeedsCompilation: no
+Packaged: 2018-08-29 00:15:56 UTC; johan
+Repository: CRAN
+Date/Publication: 2018-08-29 08:10:07 UTC
