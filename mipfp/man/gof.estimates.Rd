@@ -18,7 +18,7 @@ The method also returns the associated degrees of freedom.
 }
 \arguments{
   \item{object}{
-    The object of class \code{mipfp} containing the estimates.
+    The object of class \code{mipfp} containing.
 }
   \item{seed}{
     The seed used to compute the estimates (optional). If not provided, the
@@ -56,18 +56,15 @@ problem.
 
 The three statistics are then defined as:
 \itemize{
-  \item{Wilk's log-likelihoold ratio}{
+  \item Wilk's log-likelihoold ratio
     \deqn{G^2 = 2 \sum x_i \ln \frac{\pi_i}{\hat{\pi}_i}}{%
     G2 = 2 * \sum ( x.seed * ln (p.seed / p.hat) )}
-  }
-  \item{Wald's statistic}{
+  \item Wald's statistic
     \deqn{W^2 = h(x)^T ( H^T_x D_x H_x)^{-1} h(x)}{%
     W2 = t(h(x)) * inv(t(H) * diag(x.seed) * H) * h(x.seed)}
-  }
-  \item{Pearson Chi-square}{
+  \item Pearson Chi-square
     \deqn{\chi^2 = (x - n \hat{\pi})^T D^{-1}_{n\hat{\pi}} (x - n \hat{\pi})}{%
     X2 = t(x.seed - n * p.hat) * inv(diag(n * p.hat)) * (x.seed - n * p.hat)}
-  }
 }
 where \eqn{x}{x.seed} is the vectorization of the \code{seed}, 
 \eqn{n = \sum x_i}{n = sum(x.seed)}, \eqn{D_v}{diag(v)} is a diagonal matrix 
@@ -75,7 +72,7 @@ derived from the vector \eqn{v}{v} and \eqn{H}{H} denotes the Jacobian evaluated
 in \eqn{\hat{\pi}}{p.hat} (the vector of the estimated probabilities) of the 
 function \eqn{h(x)}{h(x)}.
 
-The degrees of freedom for these statistics correspond to the number of
+The degrees of freedom for these statistics corresponds to the number of
 components in \eqn{m}{m}.
 }
 \value{

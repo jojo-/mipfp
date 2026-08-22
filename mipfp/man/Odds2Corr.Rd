@@ -33,8 +33,7 @@ Odds2Corr(odds, marg.probs)
 }
 }
 \value{
-The function returns a list with the correlations and the pairwise 
-probabilities.
+The function return a list with the correlations and the pairwise probabilities.
   \item{corr}{
     A matrix of the same dimension as \code{odds} containing the correlations
 }

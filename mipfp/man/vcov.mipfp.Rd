@@ -32,7 +32,7 @@ and Wu (1991) or Lang's formula (2004).
 }
   \item{target.list}{
     A list of the target margins used to create \code{object} function. Each
-    component of the list is an array whose cells indicate which dimension the
+    component of the list is an array whose cells indicates which dimension the
     corresponding margin relates to (optional).
 }
   \item{replace.zeros}{
@@ -44,7 +44,7 @@ and Wu (1991) or Lang's formula (2004).
 }
 }
 \details{
-The asymptotic covariance matrix of the estimates' probabilities using Delta's 
+The asymptotic covariance matrix of the estimates probabilities using Delta's 
 formula has the form (Little and Wu, 1991)
 \deqn{K(K^T D1^{-1} K)^{-1} K^T D2^{-1} K (K^T D1^{-1} K)^{-1} K^T}{
       K * inv(t(K) * inv(D1) * K) * t(K) * inv(D2) * K * inv(t(K) * inv(D1)
@@ -55,27 +55,23 @@ where
     matrix \eqn{A}{A} required to obtain the marginal frequencies \eqn{m}{m};
 }
   \item{\code{D1} and \code{D2} are two diagonal matrices whose components
-    depend on the estimation process used to generate \code{object}.
+    depends on the estimation process used to generate \code{object}.
 }
 }
 If the estimation process has been done using
 \itemize{
-  \item{\code{ipfp}}{
+  \item \code{ipfp}
     then \eqn{diag(D1) = \hat{p}}{diag(D1) = p.hat} and 
     \eqn{diag(D2) = p_*}{diag(D2) = p.seed};
-}
-  \item{\code{ml}}{
+  \item \code{ml}
     then \eqn{diag(D1) = \frac{\hat{p}^2}{p_*}}{diag(D1) = p.hat^2 / p.seed} and 
     \eqn{diag(D2) = diag(D1)}{diag(D2) = diag(D1)};
-}
-  \item{\code{chi2}}{
+  \item \code{chi2}
     then \eqn{diag(D1) = \frac{\hat{p}^4}{p_*^3}}{diag(D1) = p.hat^4 / p.seed^3}
     and \eqn{diag(D2) = diag(D1)}{diag(D2) = diag(D1)};
-}
-  \item{\code{lsq}}{
+  \item \code{lsq}
     then \eqn{diag(D1) = p_*}{diag(D1) = p.seed} and 
     \eqn{diag(D2) = \frac{p_*3}{\hat{p}^2}}{diag(D2) = p.seed^3 / p.hat^2};
-}
 }
 where \eqn{\hat{p}}{p.hat} is the vector of estimated probabilities and
 \eqn{p_*}{p.seed} is the vector of the seed probabilities.
@@ -86,31 +82,29 @@ Using Lang's formula (2004), the covariance matrix becomes
       1/N (D - p.hat * t(p.hat) - D * H * inv(t(H) * D * H) * t(H) * D) }
 where
 \itemize{
-  \item{\code{D}}{
+  \item \code{D}
     is a diagonal matrix of the estimated probabilities \eqn{\hat{p}}{p.hat};
-  }
-  \item{\code{H}}{
+  \item \code{H}
     denotes the Jacobian evaluated in \eqn{\hat{p}}{p.hat} of the function
     \eqn{h(p) = A^T p - m}{h(p) = t(A) * p - m}.
-  }
 }
 }
 \value{
 A list with the following components:
   \item{x.hat.cov}{
-    A covariance matrix of the estimated counts (last index moves fastest)
+    A covariance matrix of the estimated counts (last index move fastest)
     computed using the method specified in \code{cov.method}.
 }
   \item{p.hat.cov}{
     A covariance matrix of the estimated probabilities (last index 
-    moves fastest) computed using the method specified in \code{cov.method}.
+    move fastest) computed using the method specified in \code{cov.method}.
 }
   \item{x.hat.se}{
-    The standard deviation of the estimated counts (last index moves fastest)
+    The standard deviation of the estimated counts (last index move fastest)
     computed using the method specified in \code{cov.method}.
 }
   \item{p.hat.se}{
-    The standard deviation of the estimated probabilities (last index moves 
+    The standard deviation of the estimated probabilities (last index move 
     fastest) computed using the method specified in \code{cov.method}.
 }
   \item{df}{
@@ -150,7 +144,7 @@ target.row <- apply(true.table, 2, sum)
 target.col <- apply(true.table, 1, sum)
 # storing the margins in a list
 target.data <- list(target.col, target.row)
-# list of dimensions of each marginal constraint
+# list of dimensions of each marginal constrain
 target.list <- list(1, 2)
 # calling the Estimate function
 res <- Estimate(seed, target.list, target.data)

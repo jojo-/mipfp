@@ -1,0 +1,18 @@
+bibentry(bibtype = "Article",
+  title        = "{mipfp}: An {R} Package for Multidimensional Array Fitting and Simulating Multivariate {B}ernoulli Distributions",
+  author       = c(person(given = "Johan",
+                          family = "Barth{\\'e}lemy",
+                          email = "johan_barthelemy@uow.edu.au"),
+                   person(given = "Thomas",
+                          family = "Suesse",
+                          email = "tsuesse@uow.edu.au")),
+  journal      = "Journal of Statistical Software, Code Snippets",
+  year         = "2018",
+  volume       = "86",
+  number       = "2",
+  pages        = "1--20",
+  doi          = "10.18637/jss.v086.c02",
+
+  header       = "To cite mipfp in publications use:"
+)
+

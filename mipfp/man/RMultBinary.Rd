@@ -34,7 +34,7 @@ RMultBinary(n = 1, mult.bin.dist, target.values = NULL)
 }
 }
 \value{
-A list whose elements are detailed hereunder.
+A list whose elements are detailed herehunder.
   \item{binary.sequences}{
   The generated \eqn{K \times n}{K x n} random sequence.
 }

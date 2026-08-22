@@ -29,15 +29,15 @@ hence returning a matrix of full rank is provided.
 \tabular{ll}{
 Package: \tab mipfp\cr
 Type: \tab Package\cr
-Version: \tab 3.1\cr
-Date: \tab 2016-11-29\cr
+Version: \tab 3.2.3\cr
+Date: \tab 2026-08-22\cr
 Depends: \tab cmm, numDeriv, Rsolnp, R(>= 2.10.0)\cr
 License: \tab GPL-2\cr
 }
 This package provides an implementation of several fitting procedures for 
-updating an \eqn{N}-dimensional array with respect to given target marginal 
-distributions. Those targets can also be multi-dimensional. The available 
-methods are listed hereunder.
+updating a \eqn{N}-dimensional array with respect to given target marginal 
+distributions. Those targets can also multi-dimensional. The available methods
+are listed herehunder.
 
 \itemize{
   \item The function \code{\link[mipfp:Ipfp]{Ipfp}} provides the iterative 
@@ -58,7 +58,7 @@ the confidence interval of the estimates
 (\code{\link[mipfp:confint.mipfp]{confint}}), the comparison of the deviations
 (\code{\link[mipfp:CompareMaxDev]{CompareMaxDev}}), etc. Note that the functions 
 starting with a lower case are S3 methods for objects of class \code{mipfp} 
-while the ones starting with an upper case are general functions.
+while the one starting with an upper case are general functions.
 
 The package also includes an application of the IPFP to simulate and estimate 
 the parameters of multivariate Bernoulli distributions, respectively in the
@@ -70,14 +70,14 @@ turn responsible for converting correlation to odds ratio, odds ratio to
 correlation, correlation to pairwise probability and odds ratio to pairwise 
 probability.
 
-Finally, auxiliary functions are also provided. \code{\link[mipfp]{expand}} 
+Finally, auxillary functions are also provided. \code{\link[mipfp]{expand}} 
 expands a multi-dimensional contingency table (stored in \code{table}) into a
-data frame of individual records. \code{\link[mipfp]{Array2Vector}} and 
-\code{\link[mipfp]{Vector2Array}} transform an array to a vector and 
+data frame of individual recors. \code{\link[mipfp]{Array2Vector}} and 
+\code{\link[mipfp]{Vector2Array}} transforms an array to a vector and 
 vice-versa. \code{\link[mipfp:flat]{flat}} flattens multi-dimensional objects 
-for pretty printing. The function \code{\link[mipfp]{GetLinInd}}, extracting the 
+for pretty printing. The function \code{\link[mipfp]{GetLinInd}} extracting the 
 linearly independant columns from a matrix (using QR decomposition) and 
-returning a matrix of full rank, is also provided. 
+returning a matrix of full rank is also provided. 
 }
 \author{
 Johan Barthelemy and Thomas Suesse.
@@ -88,6 +88,11 @@ Maintainer: Johan Barthelemy \email{johan@uow.edu.au}.
  Bacharach, M. (1965).
  Estimating Nonnegative Matrices from Marginal Data.
  \emph{International Economic Review} (Blackwell Publishing) 6 (3): 294-310.
+ 
+ Barthelemy, J., Suesse, T. (2018).
+ mipfp: An R Package for Multidimensional Array Fitting and Simulating Multivariate Bernoulli Distributions.
+ \emph{Journal of Statistical Software, Code Snippets} 86 (2): 1-20, doi: 10.18637/jss.v086.c02.
+ 
  
  Bishop, Y. M. M., Fienberg, S. E., Holland, P. W. (1975).
  \emph{Discrete Multivariate Analysis: Theory and Practice.}
@@ -141,7 +146,7 @@ target.row <- c(87, 13)
 target.col <- c(52, 48)
 # storing the margins in a list
 target.data <- list(target.col, target.row)
-# list of dimensions of each marginal constraint
+# list of dimensions of each marginal constrain
 target.list <- list(1, 2)
 # calling the fitting methods
 r.ipfp <- Ipfp(seed, target.list, target.data)
